@@ -1,6 +1,3 @@
-clear
-
-
 # ------------------------------------------------------
 # Set System Time
 # ------------------------------------------------------
@@ -32,8 +29,12 @@ pacman --noconfirm -S alsa-utils pipewire pipewire-alsa pipewire-pulse
 pacman --noconfirm -S dosfstools mtools ntfs-3g nfs-utils
 # Security
 pacman --noconfirm -S firewalld
+# Display
+pacman --noconfirm -S hyprland
 # Utilities
 pacman --noconfirm -S gvfs flatpak openssh git neovim
+# Testing
+# pacman --noconfirm -S grub xdg-desktop-portal-wlr efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack bash-completion openssh rsync reflector acpi acpi_call dnsmasq openbsd-netcat ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font exa bat htop ranger zip unzip neofetch duf xorg xorg-xinit xclip grub-btrfs xf86-video-amdgpu xf86-video-nouveau xf86-video-intel xf86-video-qxl brightnessctl pacman-contrib inxi
 
 # ------------------------------------------------------
 # set lang utf8 US
@@ -52,12 +53,11 @@ echo "KEYMAP=$keyboardlayout" >> /etc/vconsole.conf
 # ------------------------------------------------------
 # Set hostname and localhost
 # ------------------------------------------------------
-read -p "Enter hostname:" hostname
+read -p "Enter hostname: " hostname
 echo "$hostname" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
-
 
 # ------------------------------------------------------
 # Set Root Password
@@ -82,7 +82,7 @@ echo "Uncomment %wheel group in sudoers (around line 85):"
 echo "Before: #%wheel ALL=(ALL:ALL) ALL"
 echo "After:  %wheel ALL=(ALL:ALL) ALL"
 echo ""
-read -p "Open sudoers now?" c
+read -p "Open sudoers now? " c
 EDITOR=vim sudo -E visudo
 usermod -aG wheel $username
 
@@ -110,4 +110,3 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # After:  BINARIES=(btrfs setfont)
 sed -i 's/BINARIES=()/BINARIES=(btrfs setfont)/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
-
