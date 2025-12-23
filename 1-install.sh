@@ -37,14 +37,13 @@ mount /dev/$sda1 /mnt/boot/efi
 # ------------------------------------------------------
 # Install base packages
 # ------------------------------------------------------
-pacstrap -K /mnt base linux linux-firmware git vim openssh
+pacstrap -K /mnt base linux linux-firmware git vim openssh amd-ucode reflector
 
 # ------------------------------------------------------
 # Generate fstab
 # ------------------------------------------------------
 genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
-
 
 # ------------------------------------------------------
 # Install configuration scripts
