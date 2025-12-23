@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 read -p "Enter TZ (America/Toronto) :  " zoneinfo
 ln -sf /usr/share/zoneinfo/$zoneinfo /etc/localtime
-hwclock --systohci
+hwclock --systohc
 
 # ------------------------------------------------------
 # Update reflector
@@ -20,20 +20,19 @@ pacman -Syy
 # Install Packages
 # ------------------------------------------------------
 # Boot & System
-pacman --noconfirm -S grub efibootmgr 
-#base-devel linux-headers acpi acpid grub-btrfs os-prober
+pacman --noconfirm -S grub efibootmgr base-devel linux-headers acpi acpid grub-btrfs os-prober
 # Network
-#pacman --noconfirm -S networkmanager network-manager-applet wpa_supplicant inetutils dnsutils reflector avahi nns-mdns
+pacman --noconfirm -S networkmanager network-manager-applet wpa_supplicant inetutils dnsutils reflector avahi nns-mdns
 # Audio
-#pacman --noconfirm -S alsa-utils pipewire pipewire-alsa pipewire-pulse
+pacman --noconfirm -S alsa-utils pipewire pipewire-alsa pipewire-pulse
 # File System & Storage
-#pacman --noconfirm -S dosfstools mtools ntfs-3g nfs-utils
+pacman --noconfirm -S dosfstools mtools ntfs-3g nfs-utils
 # Security
-#pacman --noconfirm -S firewalld
+pacman --noconfirm -S firewalld
 # Display
-#pacman --noconfirm -S hyprland
+pacman --noconfirm -S hyprland
 # Utilities
-#pacman --noconfirm -S gvfs flatpak openssh git neovim
+pacman --noconfirm -S gvfs flatpak openssh git neovim
 
 # ------------------------------------------------------
 # set lang utf8 US
@@ -54,9 +53,6 @@ echo "KEYMAP=$keyboardlayout" >> /etc/vconsole.conf
 # ------------------------------------------------------
 read -p "Enter hostname: " hostname
 echo "$hostname" >> /etc/hostname
-echo "127.0.0.1 localhost" >> /etc/hosts
-echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 
 # ------------------------------------------------------
 # Set Root Password
@@ -88,18 +84,18 @@ usermod -aG wheel $username
 # ------------------------------------------------------
 # Enable Services
 # ------------------------------------------------------
-#systemctl enable NetworkManager
-#systemctl enable sshd
-#systemctl enable avahi-daemon
-#systemctl enable reflector.timer
-#systemctl enable fstrim.timer
-#systemctl enable firewalld
-#systemctl enable acpid
+systemctl enable NetworkManager
+systemctl enable sshd
+systemctl enable avahi-daemon
+systemctl enable reflector.timer
+systemctl enable fstrim.timer
+systemctl enable firewalld
+systemctl enable acpid
 
 # ------------------------------------------------------
 # Grub installation
 # ------------------------------------------------------
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # ------------------------------------------------------

@@ -12,8 +12,9 @@ timedatectl set-ntp true
 # ------------------------------------------------------
 # Format partitions
 # ------------------------------------------------------
-mkfs.fat -F 32 /dev/$sda1;
+umount /mnt
 mkfs.btrfs -f /dev/$sda2
+mkfs.fat -F 32 /dev/$sda1;
 
 # ------------------------------------------------------
 # Mount points for btrfs
@@ -35,6 +36,7 @@ mount -o compress=zstd:1,noatime,subvol=@snapshots /dev/$sda2 /mnt/.snapshots
 mount /dev/$sda1 /mnt/boot/efi
 
 # ------------------------------------------------------
+# Testing
 # Install base packages
 # ------------------------------------------------------
 pacstrap -K /mnt base linux linux-firmware git vim openssh amd-ucode reflector
