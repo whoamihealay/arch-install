@@ -62,9 +62,8 @@ echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 # ------------------------------------------------------
 # Set Root Password
 # ------------------------------------------------------
-read -p "Enter root password: " rootPassword
 echo "Set root password"
-passwd $rootPassword
+passwd root
 
 # ------------------------------------------------------
 # Add User
