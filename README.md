@@ -29,7 +29,7 @@ pacman -Syy
 pacman -S git
 
 # Clone Installation
-git clone https://gitlab.com/stephan-raabe/archinstall.git
+git clone https://github.com/whoamihealay/arch-install.git
 cd archinstall
 
 # Start the script
