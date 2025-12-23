@@ -88,6 +88,17 @@ EDITOR=vim sudo -E visudo
 usermod -aG wheel $username
 
 # ------------------------------------------------------
+# Enable Services
+# ------------------------------------------------------
+systemctl enable NetworkManager
+systemctl enable sshd
+systemctl enable avahi-daemon
+systemctl enable reflector.timer
+systemctl enable fstrim.timer
+systemctl enable firewalld
+systemctl enable acpid
+
+# ------------------------------------------------------
 # Grub installation
 # ------------------------------------------------------
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --removable
